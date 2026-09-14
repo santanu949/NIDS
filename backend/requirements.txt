@@ -1,0 +1,17 @@
+# Phase 2 – Data Preprocessing Pipeline
+# UNSW-NB15 Binary NIDS
+
+# Core ML / data stack
+pandas==3.0.5
+numpy==2.5.3
+scikit-learn==1.9.1
+joblib==1.6.0
+scipy==1.18.1
+
+# scikit-learn transitive dependencies (pinned for reproducibility)
+threadpoolctl==3.6.0
+narwhals==2.26.0
+cloudpickle==3.1.2
+
+# Python stdlib used (no install needed):
+#   json, math, os, sys, pathlib, typing

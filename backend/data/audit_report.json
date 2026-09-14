@@ -1,0 +1,1254 @@
+{
+  "near_constant_threshold_used": 0.99,
+  "train": {
+    "dataset": "UNSW_NB15_training-set",
+    "shape": {
+      "rows": 175341,
+      "columns": 45
+    },
+    "column_names": [
+      "id",
+      "dur",
+      "proto",
+      "service",
+      "state",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sttl",
+      "dttl",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_srv_src",
+      "ct_state_ttl",
+      "ct_dst_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "ct_src_ltm",
+      "ct_srv_dst",
+      "is_sm_ips_ports",
+      "attack_cat",
+      "label"
+    ],
+    "column_summary": [
+      {
+        "column": "id",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 175341,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dur",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 74039,
+        "null_pct": 0.0
+      },
+      {
+        "column": "proto",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 133,
+        "null_pct": 0.0
+      },
+      {
+        "column": "service",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 13,
+        "null_pct": 0.0
+      },
+      {
+        "column": "state",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 9,
+        "null_pct": 0.0
+      },
+      {
+        "column": "spkts",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 480,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dpkts",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 443,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sbytes",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 7214,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dbytes",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 6660,
+        "null_pct": 0.0
+      },
+      {
+        "column": "rate",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 76991,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 11,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 6,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sload",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 80885,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dload",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 77474,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sloss",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 409,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dloss",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 370,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sinpkt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 76161,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dinpkt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 74245,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sjit",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 77532,
+        "null_pct": 0.0
+      },
+      {
+        "column": "djit",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 76831,
+        "null_pct": 0.0
+      },
+      {
+        "column": "swin",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 13,
+        "null_pct": 0.0
+      },
+      {
+        "column": "stcpb",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 75265,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dtcpb",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 75089,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dwin",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 7,
+        "null_pct": 0.0
+      },
+      {
+        "column": "tcprtt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 43319,
+        "null_pct": 0.0
+      },
+      {
+        "column": "synack",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 40142,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ackdat",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 37708,
+        "null_pct": 0.0
+      },
+      {
+        "column": "smean",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 1357,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dmean",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 1328,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trans_depth",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 11,
+        "null_pct": 0.0
+      },
+      {
+        "column": "response_body_len",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 2386,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_srv_src",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 52,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_state_ttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 5,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 50,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_src_dport_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 47,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_sport_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 32,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_src_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 54,
+        "null_pct": 0.0
+      },
+      {
+        "column": "is_ftp_login",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 4,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_ftp_cmd",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 4,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_flw_http_mthd",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 11,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_src_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 50,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_srv_dst",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 52,
+        "null_pct": 0.0
+      },
+      {
+        "column": "is_sm_ips_ports",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 2,
+        "null_pct": 0.0
+      },
+      {
+        "column": "attack_cat",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 10,
+        "null_pct": 0.0
+      },
+      {
+        "column": "label",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 2,
+        "null_pct": 0.0
+      }
+    ],
+    "numeric_columns": [
+      "id",
+      "dur",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sttl",
+      "dttl",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_srv_src",
+      "ct_state_ttl",
+      "ct_dst_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "ct_src_ltm",
+      "ct_srv_dst",
+      "is_sm_ips_ports",
+      "label"
+    ],
+    "categorical_columns": [
+      "proto",
+      "service",
+      "state",
+      "attack_cat"
+    ],
+    "total_missing_values": 0,
+    "columns_with_missing": [],
+    "total_infinite_values": 0,
+    "infinite_values_by_column": {},
+    "duplicate_rows": 0,
+    "near_constant_columns": [],
+    "target_distribution_label": {
+      "1": 119341,
+      "0": 56000
+    },
+    "target_distribution_attack_cat": {
+      "Normal": 56000,
+      "Generic": 40000,
+      "Exploits": 33393,
+      "Fuzzers": 18184,
+      "DoS": 12264,
+      "Reconnaissance": 10491,
+      "Analysis": 2000,
+      "Backdoor": 1746,
+      "Shellcode": 1133,
+      "Worms": 130
+    },
+    "explicit_column_inspection": {
+      "label": {
+        "present": true,
+        "dtype": "int64",
+        "null_count": 0,
+        "unique_count": 2,
+        "top_value_counts": {
+          "1": 119341,
+          "0": 56000
+        },
+        "inf_count": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.6806223302022916
+      },
+      "attack_cat": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 10,
+        "top_value_counts": {
+          "Normal": 56000,
+          "Generic": 40000,
+          "Exploits": 33393,
+          "Fuzzers": 18184,
+          "DoS": 12264,
+          "Reconnaissance": 10491,
+          "Analysis": 2000,
+          "Backdoor": 1746,
+          "Shellcode": 1133,
+          "Worms": 130
+        }
+      },
+      "id": {
+        "present": true,
+        "dtype": "int64",
+        "null_count": 0,
+        "unique_count": 175341,
+        "top_value_counts": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "15": 1,
+          "16": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1
+        },
+        "inf_count": 0,
+        "min": 1.0,
+        "max": 175341.0,
+        "mean": 87671.0
+      },
+      "proto": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 133,
+        "top_value_counts": {
+          "tcp": 79946,
+          "udp": 63283,
+          "unas": 12084,
+          "arp": 2859,
+          "ospf": 2595,
+          "sctp": 1150,
+          "any": 300,
+          "gre": 225,
+          "sun-nd": 201,
+          "swipe": 201,
+          "mobile": 201,
+          "pim": 201,
+          "ipv6": 201,
+          "rsvp": 200,
+          "sep": 193,
+          "ib": 101,
+          "ddp": 100,
+          "ipv6-frag": 100,
+          "cftp": 100,
+          "wsn": 100
+        }
+      },
+      "service": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 13,
+        "top_value_counts": {
+          "-": 94168,
+          "dns": 47294,
+          "http": 18724,
+          "smtp": 5058,
+          "ftp-data": 3995,
+          "ftp": 3428,
+          "ssh": 1302,
+          "pop3": 1105,
+          "dhcp": 94,
+          "snmp": 80,
+          "ssl": 56,
+          "irc": 25,
+          "radius": 12
+        }
+      },
+      "state": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 9,
+        "top_value_counts": {
+          "INT": 82275,
+          "FIN": 77825,
+          "CON": 13152,
+          "REQ": 1991,
+          "RST": 83,
+          "ECO": 12,
+          "PAR": 1,
+          "URN": 1,
+          "no": 1
+        }
+      }
+    }
+  },
+  "test": {
+    "dataset": "UNSW_NB15_testing-set",
+    "shape": {
+      "rows": 82332,
+      "columns": 45
+    },
+    "column_names": [
+      "id",
+      "dur",
+      "proto",
+      "service",
+      "state",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sttl",
+      "dttl",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_srv_src",
+      "ct_state_ttl",
+      "ct_dst_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "ct_src_ltm",
+      "ct_srv_dst",
+      "is_sm_ips_ports",
+      "attack_cat",
+      "label"
+    ],
+    "column_summary": [
+      {
+        "column": "id",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 82332,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dur",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 39888,
+        "null_pct": 0.0
+      },
+      {
+        "column": "proto",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 131,
+        "null_pct": 0.0
+      },
+      {
+        "column": "service",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 13,
+        "null_pct": 0.0
+      },
+      {
+        "column": "state",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 7,
+        "null_pct": 0.0
+      },
+      {
+        "column": "spkts",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 420,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dpkts",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 436,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sbytes",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 4489,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dbytes",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 4034,
+        "null_pct": 0.0
+      },
+      {
+        "column": "rate",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 40616,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 11,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 8,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sload",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 42873,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dload",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 40614,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sloss",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 253,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dloss",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 311,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sinpkt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 39970,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dinpkt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 37617,
+        "null_pct": 0.0
+      },
+      {
+        "column": "sjit",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 39944,
+        "null_pct": 0.0
+      },
+      {
+        "column": "djit",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 38381,
+        "null_pct": 0.0
+      },
+      {
+        "column": "swin",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 11,
+        "null_pct": 0.0
+      },
+      {
+        "column": "stcpb",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 39219,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dtcpb",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 39108,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dwin",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 14,
+        "null_pct": 0.0
+      },
+      {
+        "column": "tcprtt",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 26130,
+        "null_pct": 0.0
+      },
+      {
+        "column": "synack",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 24934,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ackdat",
+        "dtype": "float64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 24020,
+        "null_pct": 0.0
+      },
+      {
+        "column": "smean",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 1282,
+        "null_pct": 0.0
+      },
+      {
+        "column": "dmean",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 1222,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trans_depth",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 8,
+        "null_pct": 0.0
+      },
+      {
+        "column": "response_body_len",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 1190,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_srv_src",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 57,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_state_ttl",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 7,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 50,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_src_dport_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 50,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_sport_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 33,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_dst_src_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 57,
+        "null_pct": 0.0
+      },
+      {
+        "column": "is_ftp_login",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 3,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_ftp_cmd",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 3,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_flw_http_mthd",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 8,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_src_ltm",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 50,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ct_srv_dst",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 57,
+        "null_pct": 0.0
+      },
+      {
+        "column": "is_sm_ips_ports",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 2,
+        "null_pct": 0.0
+      },
+      {
+        "column": "attack_cat",
+        "dtype": "str",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 10,
+        "null_pct": 0.0
+      },
+      {
+        "column": "label",
+        "dtype": "int64",
+        "null_count": 0,
+        "inf_count": 0,
+        "unique_count": 2,
+        "null_pct": 0.0
+      }
+    ],
+    "numeric_columns": [
+      "id",
+      "dur",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sttl",
+      "dttl",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_srv_src",
+      "ct_state_ttl",
+      "ct_dst_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "ct_src_ltm",
+      "ct_srv_dst",
+      "is_sm_ips_ports",
+      "label"
+    ],
+    "categorical_columns": [
+      "proto",
+      "service",
+      "state",
+      "attack_cat"
+    ],
+    "total_missing_values": 0,
+    "columns_with_missing": [],
+    "total_infinite_values": 0,
+    "infinite_values_by_column": {},
+    "duplicate_rows": 0,
+    "near_constant_columns": [
+      {
+        "column": "is_ftp_login",
+        "dominant_value": "0",
+        "dominant_count": 81654,
+        "dominant_fraction": 0.991765,
+        "unique_values": 3
+      },
+      {
+        "column": "ct_ftp_cmd",
+        "dominant_value": "0",
+        "dominant_count": 81652,
+        "dominant_fraction": 0.991741,
+        "unique_values": 3
+      }
+    ],
+    "target_distribution_label": {
+      "1": 45332,
+      "0": 37000
+    },
+    "target_distribution_attack_cat": {
+      "Normal": 37000,
+      "Generic": 18871,
+      "Exploits": 11132,
+      "Fuzzers": 6062,
+      "DoS": 4089,
+      "Reconnaissance": 3496,
+      "Analysis": 677,
+      "Backdoor": 583,
+      "Shellcode": 378,
+      "Worms": 44
+    },
+    "explicit_column_inspection": {
+      "label": {
+        "present": true,
+        "dtype": "int64",
+        "null_count": 0,
+        "unique_count": 2,
+        "top_value_counts": {
+          "1": 45332,
+          "0": 37000
+        },
+        "inf_count": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.5506000097167566
+      },
+      "attack_cat": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 10,
+        "top_value_counts": {
+          "Normal": 37000,
+          "Generic": 18871,
+          "Exploits": 11132,
+          "Fuzzers": 6062,
+          "DoS": 4089,
+          "Reconnaissance": 3496,
+          "Analysis": 677,
+          "Backdoor": 583,
+          "Shellcode": 378,
+          "Worms": 44
+        }
+      },
+      "id": {
+        "present": true,
+        "dtype": "int64",
+        "null_count": 0,
+        "unique_count": 82332,
+        "top_value_counts": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "15": 1,
+          "16": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1
+        },
+        "inf_count": 0,
+        "min": 1.0,
+        "max": 82332.0,
+        "mean": 41166.5
+      },
+      "proto": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 131,
+        "top_value_counts": {
+          "tcp": 43095,
+          "udp": 29418,
+          "unas": 3515,
+          "arp": 987,
+          "ospf": 676,
+          "sctp": 324,
+          "any": 96,
+          "gre": 88,
+          "rsvp": 64,
+          "ipv6": 61,
+          "sep": 58,
+          "sun-nd": 54,
+          "mobile": 52,
+          "swipe": 52,
+          "pim": 52,
+          "prm": 34,
+          "xns-idp": 34,
+          "leaf-1": 34,
+          "bbn-rcc": 34,
+          "ggp": 33
+        }
+      },
+      "service": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 13,
+        "top_value_counts": {
+          "-": 47153,
+          "dns": 21367,
+          "http": 8287,
+          "smtp": 1851,
+          "ftp": 1552,
+          "ftp-data": 1396,
+          "pop3": 423,
+          "ssh": 204,
+          "ssl": 30,
+          "snmp": 29,
+          "dhcp": 26,
+          "radius": 9,
+          "irc": 5
+        }
+      },
+      "state": {
+        "present": true,
+        "dtype": "str",
+        "null_count": 0,
+        "unique_count": 7,
+        "top_value_counts": {
+          "FIN": 39339,
+          "INT": 34163,
+          "CON": 6982,
+          "REQ": 1842,
+          "ACC": 4,
+          "RST": 1,
+          "CLO": 1
+        }
+      }
+    }
+  }
+}
