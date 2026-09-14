@@ -1,0 +1,256 @@
+{
+  "dataset": "UNSW-NB15",
+  "task": "multiclass_attack_category_classification",
+  "target_column": "attack_cat",
+  "classes": [
+    "Analysis",
+    "Backdoor",
+    "DoS",
+    "Exploits",
+    "Fuzzers",
+    "Generic",
+    "Normal",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "class_to_id": {
+    "Analysis": 0,
+    "Backdoor": 1,
+    "DoS": 2,
+    "Exploits": 3,
+    "Fuzzers": 4,
+    "Generic": 5,
+    "Normal": 6,
+    "Reconnaissance": 7,
+    "Shellcode": 8,
+    "Worms": 9
+  },
+  "split": {
+    "training_rows": 140272,
+    "validation_rows": 35069,
+    "random_state": 42,
+    "test_size": 0.2,
+    "stratified": true
+  },
+  "preprocessing": {
+    "artifact": "backend/ml/artifacts/preprocessor.joblib",
+    "feature_count_after_transform": 192
+  },
+  "model": {
+    "model_class": "XGBClassifier",
+    "objective": "multi:softprob",
+    "n_estimators": 300,
+    "learning_rate": 0.1,
+    "max_depth": 8,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42
+  },
+  "metrics_validation": {
+    "accuracy": 0.833984,
+    "weighted_precision": 0.831544,
+    "weighted_recall": 0.833984,
+    "weighted_f1": 0.820354,
+    "macro_f1": 0.618551,
+    "classification_report": {
+      "Analysis": {
+        "precision": 0.6904761904761905,
+        "recall": 0.145,
+        "f1-score": 0.2396694214876033,
+        "support": 400.0
+      },
+      "Backdoor": {
+        "precision": 0.8775510204081632,
+        "recall": 0.12320916905444126,
+        "f1-score": 0.21608040201005024,
+        "support": 349.0
+      },
+      "DoS": {
+        "precision": 0.33270676691729323,
+        "recall": 0.1443130860171219,
+        "f1-score": 0.2013079328973557,
+        "support": 2453.0
+      },
+      "Exploits": {
+        "precision": 0.6278481012658228,
+        "recall": 0.8911513699655637,
+        "f1-score": 0.7366792499535862,
+        "support": 6679.0
+      },
+      "Fuzzers": {
+        "precision": 0.7876984126984127,
+        "recall": 0.7640912840252956,
+        "f1-score": 0.775715282623866,
+        "support": 3637.0
+      },
+      "Generic": {
+        "precision": 0.9969566320060868,
+        "recall": 0.98275,
+        "f1-score": 0.9898023416845021,
+        "support": 8000.0
+      },
+      "Normal": {
+        "precision": 0.9480460603862544,
+        "recall": 0.9335714285714286,
+        "f1-score": 0.9407530703135544,
+        "support": 11200.0
+      },
+      "Reconnaissance": {
+        "precision": 0.9188235294117647,
+        "recall": 0.7445185891325071,
+        "f1-score": 0.822538177988415,
+        "support": 2098.0
+      },
+      "Shellcode": {
+        "precision": 0.7379912663755459,
+        "recall": 0.7444933920704846,
+        "f1-score": 0.7412280701754386,
+        "support": 227.0
+      },
+      "Worms": {
+        "precision": 0.6,
+        "recall": 0.46153846153846156,
+        "f1-score": 0.5217391304347826,
+        "support": 26.0
+      },
+      "accuracy": 0.8339844306937751,
+      "macro avg": {
+        "precision": 0.7518097979945535,
+        "recall": 0.5934636780375305,
+        "f1-score": 0.6185513079569154,
+        "support": 35069.0
+      },
+      "weighted avg": {
+        "precision": 0.8315442924362677,
+        "recall": 0.8339844306937751,
+        "f1-score": 0.8203543753561668,
+        "support": 35069.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        58,
+        6,
+        41,
+        258,
+        0,
+        0,
+        37,
+        0,
+        0,
+        0
+      ],
+      [
+        11,
+        43,
+        41,
+        245,
+        3,
+        1,
+        0,
+        2,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        354,
+        2053,
+        11,
+        6,
+        6,
+        13,
+        10,
+        0
+      ],
+      [
+        4,
+        0,
+        480,
+        5952,
+        63,
+        11,
+        37,
+        108,
+        17,
+        7
+      ],
+      [
+        2,
+        0,
+        50,
+        295,
+        2779,
+        4,
+        485,
+        2,
+        20,
+        0
+      ],
+      [
+        0,
+        0,
+        23,
+        104,
+        5,
+        7862,
+        3,
+        0,
+        3,
+        0
+      ],
+      [
+        9,
+        0,
+        1,
+        73,
+        643,
+        2,
+        10456,
+        8,
+        7,
+        1
+      ],
+      [
+        0,
+        0,
+        72,
+        458,
+        3,
+        0,
+        3,
+        1562,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        29,
+        20,
+        0,
+        2,
+        5,
+        169,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        13,
+        1,
+        0,
+        0,
+        0,
+        0,
+        12
+      ]
+    ]
+  },
+  "official_test_set_used": false,
+  "artifact_path": "backend/ml/artifacts/xgboost_multiclass.joblib"
+}
