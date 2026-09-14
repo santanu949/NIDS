@@ -1,5 +1,4 @@
-# Phase 2 – Data Preprocessing Pipeline
-# UNSW-NB15 Binary NIDS
+# NIDS ML Project Dependencies
 
 # Core ML / data stack
 pandas==3.0.5
@@ -8,15 +7,15 @@ scikit-learn==1.9.1
 joblib==1.6.0
 scipy==1.18.1
 
-# scikit-learn transitive dependencies (pinned for reproducibility)
+# scikit-learn transitive dependencies
 threadpoolctl==3.6.0
 narwhals==2.26.0
 cloudpickle==3.1.2
 
-# Python stdlib used (no install needed):
-#   json, math, os, sys, pathlib, typing
-
-# Phase 6 - FastAPI inference API
+# FastAPI inference API
 fastapi==0.141.1
 uvicorn==0.53.0
 pydantic==2.13.5
+
+# Database
+SQLAlchemy==2.0.43
