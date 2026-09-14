@@ -1,15 +1,20 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy.orm import Session
 
 from backend.api.inference import (
     predict_binary,
     predict_multiclass,
 )
-
 from backend.api.schemas import (
     HealthResponse,
     PredictionRequest,
     PredictionResponse,
 )
+from backend.app.database import Base, engine, get_db
+from backend.app.models.prediction_event import PredictionEvent
+
+
+Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(
@@ -36,11 +41,28 @@ def health_check():
 )
 def binary_prediction(
     request: PredictionRequest,
+    db: Session = Depends(get_db),
 ):
     try:
-        return predict_binary(
-            request.features
+        result = predict_binary(request.features)
+
+        event = PredictionEvent(
+            mode="dataset",
+            prediction=result["prediction"],
+            label=result["label"],
+            confidence=result["confidence"],
+            attack_category=(
+                "Normal"
+                if result["prediction"] == 0
+                else "Attack"
+            ),
         )
+
+        db.add(event)
+        db.commit()
+
+        return result
+
     except ValueError as exc:
         raise HTTPException(
             status_code=422,
@@ -54,11 +76,24 @@ def binary_prediction(
 )
 def multiclass_prediction(
     request: PredictionRequest,
+    db: Session = Depends(get_db),
 ):
     try:
-        return predict_multiclass(
-            request.features
+        result = predict_multiclass(request.features)
+
+        event = PredictionEvent(
+            mode="dataset",
+            prediction=result["prediction"],
+            label=result["label"],
+            confidence=result["confidence"],
+            attack_category=result["label"],
         )
+
+        db.add(event)
+        db.commit()
+
+        return result
+
     except ValueError as exc:
         raise HTTPException(
             status_code=422,
