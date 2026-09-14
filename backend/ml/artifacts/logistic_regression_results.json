@@ -1,0 +1,104 @@
+{
+  "model": {
+    "name": "Logistic Regression",
+    "class": "sklearn.linear_model.LogisticRegression",
+    "parameters": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "dual": false,
+      "fit_intercept": true,
+      "intercept_scaling": 1,
+      "l1_ratio": 0.0,
+      "max_iter": 1000,
+      "n_jobs": null,
+      "penalty": "deprecated",
+      "random_state": 42,
+      "solver": "lbfgs",
+      "tol": 0.0001,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "dataset": {
+    "name": "UNSW-NB15",
+    "training_csv_rows": 175341,
+    "training_partition_rows": 140272,
+    "validation_rows": 35069
+  },
+  "features": {
+    "raw_feature_count": 42,
+    "transformed_feature_count": 192,
+    "target_column": "label"
+  },
+  "split": {
+    "validation_fraction": 0.2,
+    "random_state": 42,
+    "stratified": true,
+    "shuffle": true
+  },
+  "class_distribution": {
+    "training": {
+      "0": 44800,
+      "1": 95472
+    },
+    "validation": {
+      "0": 11200,
+      "1": 23869
+    }
+  },
+  "preprocessing": {
+    "artifact": "backend/ml/artifacts/preprocessor.joblib",
+    "fitted_rows": 140272
+  },
+  "training_time_seconds": 5.021477500000401,
+  "prediction_time_seconds": 0.01017139999930805,
+  "metrics": {
+    "accuracy": 0.9325330063588925,
+    "precision": 0.9499476878007952,
+    "recall": 0.950982445850266,
+    "f1": 0.9504647851938699,
+    "confusion_matrix": [
+      [
+        10004,
+        1196
+      ],
+      [
+        1170,
+        22699
+      ]
+    ],
+    "true_negative": 10004,
+    "false_positive": 1196,
+    "false_negative": 1170,
+    "true_positive": 22699,
+    "false_positive_rate": 0.10678571428571429,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8952926436370146,
+        "recall": 0.8932142857142857,
+        "f1-score": 0.8942522570841155,
+        "support": 11200.0
+      },
+      "Attack": {
+        "precision": 0.9499476878007952,
+        "recall": 0.950982445850266,
+        "f1-score": 0.9504647851938699,
+        "support": 23869.0
+      },
+      "accuracy": 0.9325330063588925,
+      "macro avg": {
+        "precision": 0.9226201657189048,
+        "recall": 0.9220983657822759,
+        "f1-score": 0.9223585211389926,
+        "support": 35069.0
+      },
+      "weighted avg": {
+        "precision": 0.9324924853532106,
+        "recall": 0.9325330063588925,
+        "f1-score": 0.9325121685002302,
+        "support": 35069.0
+      }
+    }
+  },
+  "official_test_set_used": false
+}

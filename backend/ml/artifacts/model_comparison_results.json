@@ -1,0 +1,64 @@
+{
+  "dataset": "UNSW-NB15",
+  "split": {
+    "training_rows": 140272,
+    "validation_rows": 35069,
+    "random_state": 42,
+    "test_size": 0.2,
+    "stratified": true
+  },
+  "preprocessing": {
+    "artifact": "backend/ml/artifacts/preprocessor.joblib",
+    "feature_count_after_transform": 192
+  },
+  "official_test_set_used": false,
+  "model_selection_metric": "validation_f1",
+  "primary_model": "XGBoost",
+  "models": [
+    {
+      "model": "Logistic Regression",
+      "train_accuracy": 0.932267,
+      "validation_accuracy": 0.932533,
+      "train_f1": 0.950282,
+      "validation_f1": 0.950465,
+      "validation_precision": 0.949948,
+      "validation_recall": 0.950982,
+      "false_positive_rate": 0.106786,
+      "train_validation_f1_gap": -0.000183,
+      "true_negative": 10004,
+      "false_positive": 1196,
+      "false_negative": 1170,
+      "true_positive": 22699
+    },
+    {
+      "model": "Random Forest",
+      "train_accuracy": 0.997997,
+      "validation_accuracy": 0.95717,
+      "train_f1": 0.998527,
+      "validation_f1": 0.968366,
+      "validation_precision": 0.973656,
+      "validation_recall": 0.963132,
+      "false_positive_rate": 0.055536,
+      "train_validation_f1_gap": 0.030161,
+      "true_negative": 10578,
+      "false_positive": 622,
+      "false_negative": 880,
+      "true_positive": 22989
+    },
+    {
+      "model": "XGBoost",
+      "train_accuracy": 0.984922,
+      "validation_accuracy": 0.962132,
+      "train_f1": 0.988972,
+      "validation_f1": 0.972332,
+      "validation_precision": 0.967094,
+      "validation_recall": 0.977628,
+      "false_positive_rate": 0.070893,
+      "train_validation_f1_gap": 0.01664,
+      "true_negative": 10406,
+      "false_positive": 794,
+      "false_negative": 534,
+      "true_positive": 23335
+    }
+  ]
+}
