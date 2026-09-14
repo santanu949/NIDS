@@ -15,3 +15,8 @@ cloudpickle==3.1.2
 
 # Python stdlib used (no install needed):
 #   json, math, os, sys, pathlib, typing
+
+# Phase 6 - FastAPI inference API
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
