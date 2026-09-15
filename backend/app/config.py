@@ -1,0 +1,1 @@
+from __future__ import annotations; import os; from dotenv import load_dotenv; load_dotenv(); LIVE_INTERFACE = os.getenv("NIDS_LIVE_INTERFACE", "").strip(); LIVE_FLOW_TIMEOUT = float(os.getenv("NIDS_LIVE_FLOW_TIMEOUT", "5"))

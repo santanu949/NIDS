@@ -9,39 +9,15 @@ from backend.app.database import Base
 class PredictionEvent(Base):
     __tablename__ = "prediction_events"
 
-    id: Mapped[int] = mapped_column(
-        Integer,
-        primary_key=True,
-        autoincrement=True,
-    )
-
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
-        nullable=False,
+        DateTime, default=datetime.utcnow, nullable=False
     )
+    mode: Mapped[str] = mapped_column(String(20), nullable=False)
 
-    mode: Mapped[str] = mapped_column(
-        String(20),
-        nullable=False,
-    )
+    binary_prediction: Mapped[int] = mapped_column(Integer, nullable=False)
+    binary_label: Mapped[str] = mapped_column(String(50), nullable=False)
+    binary_confidence: Mapped[float] = mapped_column(Float, nullable=False)
 
-    prediction: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False,
-    )
-
-    label: Mapped[str] = mapped_column(
-        String(50),
-        nullable=False,
-    )
-
-    confidence: Mapped[float] = mapped_column(
-        Float,
-        nullable=False,
-    )
-
-    attack_category: Mapped[str] = mapped_column(
-        String(50),
-        nullable=False,
-    )
+    attack_category: Mapped[str] = mapped_column(String(50), nullable=False)
+    multiclass_confidence: Mapped[float] = mapped_column(Float, nullable=False)

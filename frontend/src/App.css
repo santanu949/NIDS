@@ -304,3 +304,55 @@ button {
     gap: 14px;
   }
 }
+
+.events-panel {
+  max-width: 1180px;
+  margin: 22px auto 0;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 60px 90px 1fr 1fr 80px 110px;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  border: 1px solid #202936;
+  border-radius: 9px;
+  background: #0c1219;
+  color: #8190a2;
+  font-size: 13px;
+}
+
+.event-row strong {
+  color: #dce5ee;
+  font-weight: 650;
+}
+
+.event-row time {
+  color: #68778a;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.event-row > span:first-child {
+  color: #5eead4;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .event-row {
+    grid-template-columns: 55px 75px 1fr 75px;
+  }
+
+  .event-row span:nth-child(4),
+  .event-row time {
+    display: none;
+  }
+}
