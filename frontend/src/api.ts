@@ -63,6 +63,7 @@ export type ModelMetricsResponse = {
   primary_model: string
   model_selection_metric: string
   official_test_set_used: boolean
+  official_test_evaluation_available: boolean
   training_rows: number
   validation_rows: number
   transformed_feature_count: number

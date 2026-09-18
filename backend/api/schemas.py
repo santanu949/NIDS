@@ -112,6 +112,7 @@ class ModelMetricsResponse(BaseModel):
     primary_model: str
     model_selection_metric: str
     official_test_set_used: bool
+    official_test_evaluation_available: bool
     training_rows: int
     validation_rows: int
     transformed_feature_count: int

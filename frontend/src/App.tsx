@@ -1568,15 +1568,18 @@ function App() {
                     </div>
 
                     <strong>
-                      {modelMetrics.official_test_set_used
-                        ? 'USED'
-                        : 'UNTOUCHED'}
+                      {modelMetrics.official_test_evaluation_available
+                        ? 'EVALUATED'
+                        : 'NOT AVAILABLE'}
                     </strong>
 
                     <span>
-                      Test-set isolation
+                      {modelMetrics.official_test_set_used
+                        ? 'Used during model development'
+                        : 'Held out for training and selection'}
                     </span>
                   </article>
+
                 </section>
 
                 <section className="panel model-panel">

@@ -1,0 +1,284 @@
+{
+  "dataset": "UNSW-NB15",
+  "evaluation_type": "official_test_set",
+  "official_test_set_used": true,
+  "test_rows": 82332,
+  "test_columns": 45,
+  "input_feature_count": 42,
+  "transformed_feature_count": 192,
+  "preprocessing_fitted_on_test": false,
+  "models_retrained_on_test": false,
+  "binary": {
+    "model": "XGBoost",
+    "artifact": "backend/ml/artifacts/xgboost.joblib",
+    "results": {
+      "accuracy": 0.871495894670359,
+      "precision": 0.8204366908862907,
+      "recall": 0.9814038648195536,
+      "f1": 0.893730287872396,
+      "false_positive_rate": 0.26316216216216215,
+      "confusion_matrix": [
+        [
+          27263,
+          9737
+        ],
+        [
+          843,
+          44489
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Normal",
+        "Attack"
+      ],
+      "true_negative": 27263,
+      "false_positive": 9737,
+      "false_negative": 843,
+      "true_positive": 44489
+    }
+  },
+  "multiclass": {
+    "model": "XGBoost",
+    "artifact": "backend/ml/artifacts/xgboost_multiclass.joblib",
+    "classes": [
+      "Analysis",
+      "Backdoor",
+      "DoS",
+      "Exploits",
+      "Fuzzers",
+      "Generic",
+      "Normal",
+      "Reconnaissance",
+      "Shellcode",
+      "Worms"
+    ],
+    "class_to_id": {
+      "Analysis": 0,
+      "Backdoor": 1,
+      "DoS": 2,
+      "Exploits": 3,
+      "Fuzzers": 4,
+      "Generic": 5,
+      "Normal": 6,
+      "Reconnaissance": 7,
+      "Shellcode": 8,
+      "Worms": 9
+    },
+    "results": {
+      "accuracy": 0.7655953942573969,
+      "weighted_precision": 0.8357886490944005,
+      "weighted_recall": 0.7655953942573969,
+      "weighted_f1": 0.7793050597520754,
+      "macro_f1": 0.5136514419730712,
+      "classification_report": {
+        "Analysis": {
+          "precision": 0.030036630036630037,
+          "recall": 0.060561299852289516,
+          "f1-score": 0.040156709108716944,
+          "support": 677.0
+        },
+        "Backdoor": {
+          "precision": 0.0346045197740113,
+          "recall": 0.08404802744425385,
+          "f1-score": 0.04902451225612806,
+          "support": 583.0
+        },
+        "DoS": {
+          "precision": 0.6101694915254238,
+          "recall": 0.10564930300807043,
+          "f1-score": 0.1801125703564728,
+          "support": 4089.0
+        },
+        "Exploits": {
+          "precision": 0.5924179323860852,
+          "recall": 0.8689363995688106,
+          "f1-score": 0.7045156591405681,
+          "support": 11132.0
+        },
+        "Fuzzers": {
+          "precision": 0.3014222222222222,
+          "recall": 0.5593863411415374,
+          "f1-score": 0.3917513863216266,
+          "support": 6062.0
+        },
+        "Generic": {
+          "precision": 0.9979865041358293,
+          "recall": 0.9718085951989825,
+          "f1-score": 0.9847236019008242,
+          "support": 18871.0
+        },
+        "Normal": {
+          "precision": 0.9619896116404665,
+          "recall": 0.7558378378378379,
+          "f1-score": 0.8465438694737479,
+          "support": 37000.0
+        },
+        "Reconnaissance": {
+          "precision": 0.9300951755825402,
+          "recall": 0.8106407322654462,
+          "f1-score": 0.8662692954302308,
+          "support": 3496.0
+        },
+        "Shellcode": {
+          "precision": 0.3878378378378378,
+          "recall": 0.7592592592592593,
+          "f1-score": 0.5134168157423972,
+          "support": 378.0
+        },
+        "Worms": {
+          "precision": 0.6774193548387096,
+          "recall": 0.4772727272727273,
+          "f1-score": 0.56,
+          "support": 44.0
+        },
+        "accuracy": 0.7655953942573969,
+        "macro avg": {
+          "precision": 0.5523979279979756,
+          "recall": 0.5453400522849216,
+          "f1-score": 0.5136514419730712,
+          "support": 82332.0
+        },
+        "weighted avg": {
+          "precision": 0.8357886490944005,
+          "recall": 0.7655953942573969,
+          "f1-score": 0.7793050597520754,
+          "support": 82332.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          41,
+          53,
+          18,
+          541,
+          4,
+          0,
+          20,
+          0,
+          0,
+          0
+        ],
+        [
+          41,
+          49,
+          19,
+          463,
+          6,
+          0,
+          1,
+          0,
+          4,
+          0
+        ],
+        [
+          279,
+          581,
+          432,
+          2654,
+          45,
+          8,
+          28,
+          24,
+          37,
+          1
+        ],
+        [
+          311,
+          554,
+          110,
+          9673,
+          114,
+          18,
+          89,
+          177,
+          82,
+          4
+        ],
+        [
+          111,
+          100,
+          45,
+          1278,
+          3391,
+          6,
+          950,
+          4,
+          177,
+          0
+        ],
+        [
+          0,
+          3,
+          28,
+          431,
+          38,
+          18339,
+          6,
+          0,
+          21,
+          5
+        ],
+        [
+          551,
+          0,
+          39,
+          714,
+          7610,
+          3,
+          27966,
+          6,
+          111,
+          0
+        ],
+        [
+          31,
+          76,
+          10,
+          509,
+          6,
+          1,
+          8,
+          2834,
+          21,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          45,
+          34,
+          0,
+          3,
+          2,
+          287,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          20,
+          2,
+          1,
+          0,
+          0,
+          0,
+          21
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Analysis",
+        "Backdoor",
+        "DoS",
+        "Exploits",
+        "Fuzzers",
+        "Generic",
+        "Normal",
+        "Reconnaissance",
+        "Shellcode",
+        "Worms"
+      ]
+    }
+  }
+}

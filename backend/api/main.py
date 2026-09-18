@@ -54,6 +54,10 @@ MULTICLASS_RESULTS_PATH = (
     ARTIFACT_DIR / "xgboost_multiclass_results.json"
 )
 
+OFFICIAL_TEST_RESULTS_PATH = (
+    ARTIFACT_DIR / "official_test_results.json"
+)
+
 MODEL_VERSION = "xgboost-1.0"
 
 
@@ -751,6 +755,9 @@ def get_model_metrics() -> ModelMetricsResponse:
         ),
         official_test_set_used=bool(
             comparison["official_test_set_used"]
+        ),
+        official_test_evaluation_available=(
+            OFFICIAL_TEST_RESULTS_PATH.exists()
         ),
         training_rows=int(
             comparison["split"]["training_rows"]
