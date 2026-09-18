@@ -21,6 +21,22 @@ class PredictionResponse(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
     attack_category: str
     multiclass_confidence: float = Field(ge=0.0, le=1.0)
+    severity: str
+    model_version: str
+
+
+class BatchPredictionRequest(BaseModel):
+    predictions: list[PredictionRequest] = Field(
+        ...,
+        min_length=1,
+        max_length=1000,
+        description="Batch of raw flow prediction requests.",
+    )
+
+
+class BatchPredictionResponse(BaseModel):
+    results: list[PredictionResponse]
+    total: int
 
 
 class HealthResponse(BaseModel):
@@ -33,6 +49,10 @@ class PredictionEventResponse(BaseModel):
     timestamp: datetime
     mode: str
 
+    source_ip: str | None = None
+    destination_ip: str | None = None
+    protocol: str | None = None
+
     binary_prediction: int
     binary_label: str
     binary_confidence: float = Field(ge=0.0, le=1.0)
@@ -40,7 +60,17 @@ class PredictionEventResponse(BaseModel):
     attack_category: str
     multiclass_confidence: float = Field(ge=0.0, le=1.0)
 
+    severity: str
+    model_version: str
+
     model_config = ConfigDict(from_attributes=True)
+
+
+class DetectionListResponse(BaseModel):
+    items: list[PredictionEventResponse]
+    total: int
+    limit: int
+    offset: int
 
 
 class AnalyticsResponse(BaseModel):
@@ -51,6 +81,59 @@ class AnalyticsResponse(BaseModel):
     average_binary_confidence: float = Field(ge=0.0, le=1.0)
     average_multiclass_confidence: float = Field(ge=0.0, le=1.0)
     attack_categories: dict[str, int]
+
+
+class DashboardSummaryResponse(BaseModel):
+    total_events: int
+    malicious_events: int
+    normal_events: int
+    threat_rate: float = Field(ge=0.0, le=1.0)
+    high_severity_events: int
+    live_capture_running: bool
+    recent_events: list[PredictionEventResponse]
+
+
+class AttackCategoryMetric(BaseModel):
+    category: str
+    count: int
+
+
+class ModelMetric(BaseModel):
+    model: str
+    accuracy: float = Field(ge=0.0, le=1.0)
+    precision: float = Field(ge=0.0, le=1.0)
+    recall: float = Field(ge=0.0, le=1.0)
+    f1: float = Field(ge=0.0, le=1.0)
+    false_positive_rate: float = Field(ge=0.0, le=1.0)
+
+
+class ModelMetricsResponse(BaseModel):
+    dataset: str
+    primary_model: str
+    model_selection_metric: str
+    official_test_set_used: bool
+    training_rows: int
+    validation_rows: int
+    transformed_feature_count: int
+    binary_models: list[ModelMetric]
+
+    multiclass_accuracy: float = Field(ge=0.0, le=1.0)
+    multiclass_weighted_precision: float = Field(ge=0.0, le=1.0)
+    multiclass_weighted_recall: float = Field(ge=0.0, le=1.0)
+    multiclass_weighted_f1: float = Field(ge=0.0, le=1.0)
+    multiclass_macro_f1: float = Field(ge=0.0, le=1.0)
+
+
+class ModelFeature(BaseModel):
+    name: str
+    importance: float = Field(ge=0.0)
+    rank: int
+
+
+class ModelFeaturesResponse(BaseModel):
+    model: str
+    feature_count: int
+    features: list[ModelFeature]
 
 
 class LiveStatusResponse(BaseModel):

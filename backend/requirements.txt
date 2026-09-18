@@ -19,3 +19,8 @@ pydantic==2.13.5
 
 # Database
 SQLAlchemy==2.0.43
+# Live capture / configuration / WebSocket testing
+xgboost==3.4.1
+python-dotenv==1.2.3
+scapy==2.7.0
+websockets==17.1
