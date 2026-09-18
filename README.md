@@ -1,1318 +1,1293 @@
-# \# NIDS-ML
+<div align="center">
 
-# 
+# 🛡️ NIDS-ML
 
-# Network Intrusion Detection System using Machine Learning, FastAPI, React, SQLite, WebSockets, and real-time network flow monitoring.
+### Network Intrusion Detection System using Machine Learning
 
-# 
+**UNSW-NB15 · XGBoost · FastAPI · React · SQLite · WebSockets · Scapy**
 
-# NIDS-ML detects potentially malicious network traffic using machine-learning models trained on the UNSW-NB15 dataset. It provides both dataset-based inference and controlled live monitoring, with predictions exposed through a FastAPI backend and visualized through a React dashboard.
+<br/>
 
-# 
+**A machine-learning based network intrusion detection platform that classifies network traffic as Normal or Attack, identifies attack categories, stores detection history, provides real-time WebSocket alerts, and supports controlled live network-flow monitoring.**
 
-# \## Overview
+<br/>
 
-# 
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.141.1-009688?style=for-the-badge\&logo=fastapi\&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge\&logo=react\&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white)](https://www.typescriptlang.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-3.4.1-EC0000?style=for-the-badge)](https://xgboost.readthedocs.io/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge\&logo=sqlite\&logoColor=white)](https://www.sqlite.org/)
+[![Status](https://img.shields.io/badge/Status-Complete%20%2F%20Tested-00C853?style=for-the-badge)]()
 
-# NIDS-ML implements an end-to-end intrusion detection pipeline:
+<br/>
 
-# 
+[GitHub Repository](https://github.com/santanu949/NIDS) · [Report Issue](https://github.com/santanu949/NIDS/issues)
 
-# ```text
+</div>
 
-# UNSW-NB15 Dataset
+---
 
-# &#x20;       │
+## 📖 Overview
 
-# &#x20;       ▼
+### The Problem
 
-# Data Audit
+Modern network environments generate large volumes of traffic that are difficult to inspect manually. Intrusion Detection Systems must distinguish legitimate traffic from malicious activity while dealing with class imbalance, different attack types, false positives, and changing traffic patterns.
 
-# &#x20;       │
+A model that reports 99% accuracy while generating excessive false positives is not particularly useful. The evaluation therefore considers precision, recall, F1-score, false-positive rate, confusion matrices, and per-class performance rather than accuracy alone.
 
-# &#x20;       ▼
+### The Solution
 
-# Leakage-Safe Preprocessing
+**NIDS-ML** provides an end-to-end machine-learning intrusion detection pipeline built around the **UNSW-NB15** network intrusion dataset.
 
-# &#x20;       │
+The system operates across two monitoring modes:
 
-# &#x20;       ▼
+* **Dataset Mode** — evaluates structured UNSW-NB15 network-flow records using the trained ML pipeline.
+* **Controlled Live Mode** — captures authorized network traffic using Scapy/Npcap, aggregates packets into flows, converts them into model-compatible features, and sends predictions to the backend.
 
-# Machine Learning Models
+The platform combines:
 
-# &#x20;       │
+* Leakage-safe preprocessing
+* Binary Normal/Attack detection
+* Multiclass attack-category classification
+* XGBoost inference
+* FastAPI REST services
+* SQLite persistence
+* React dashboard
+* WebSocket real-time alerts
+* Detection analytics
+* Controlled live packet capture
+* Automated ML/API/WebSocket testing
 
-# &#x20;       ├── Binary Detection
+---
 
-# &#x20;       │      └── Normal / Attack
+## ✨ Key Features
 
-# &#x20;       │
+### 🤖 Machine Learning Detection
 
-# &#x20;       └── Multiclass Detection
+| Feature                    | Description                                                               |
+| :------------------------- | :------------------------------------------------------------------------ |
+| **Binary Detection**       | Classifies network traffic as `Normal` or `Attack`                        |
+| **Multiclass Detection**   | Identifies one of 10 UNSW-NB15 traffic categories                         |
+| **Model Comparison**       | Logistic Regression, Random Forest, and XGBoost were evaluated            |
+| **Primary Model**          | XGBoost selected using validation F1 score                                |
+| **Confidence Scores**      | Binary and multiclass confidence values are returned for every prediction |
+| **Leakage-Safe Pipeline**  | Preprocessing is fitted only on the training partition                    |
+| **Feature Transformation** | 42 raw features become 192 transformed model features                     |
+
+### 📊 Detection Dashboard
+
+| Feature                | Description                                                              |
+| :--------------------- | :----------------------------------------------------------------------- |
+| **Dashboard Overview** | Traffic, attacks, normal events, threat rate, and severity statistics    |
+| **Detection History**  | Searchable and filterable persisted predictions                          |
+| **Detection Details**  | Detailed prediction, confidence, attack category, severity, and metadata |
+| **Attack Analytics**   | Attack-category distribution and detection statistics                    |
+| **Model Metrics**      | Validation and official test-set evaluation information                  |
+| **Feature Importance** | Displays transformed XGBoost feature importance                          |
+| **CSV Export**         | Export stored detections for further analysis                            |
+
+### ⚡ Real-Time Monitoring
+
+| Feature                 | Description                                                 |
+| :---------------------- | :---------------------------------------------------------- |
+| **Live Capture**        | Controlled packet capture using Scapy/Npcap                 |
+| **Flow Aggregation**    | Packets are grouped into network flows before inference     |
+| **Flow Timeout**        | Configurable timeout determines when flows are finalized    |
+| **Live Prediction**     | Finalized flows are passed through the ML pipeline          |
+| **WebSocket Alerts**    | New detections are broadcast to connected dashboard clients |
+| **Start/Stop Controls** | Live monitoring can be safely started and stopped           |
+| **Persistence**         | Live detections are stored alongside dataset detections     |
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+
+    subgraph DATA["📚 ML / Dataset Layer"]
+        DATASET["UNSW-NB15"]
+        AUDIT["Dataset Audit"]
+        PREPROCESS["Leakage-Safe Preprocessing"]
+        MODELS["ML Models"]
+        BINARY["Binary Classifier"]
+        MULTI["Multiclass Classifier"]
+    end
+
+    subgraph LIVE["🌐 Controlled Live Monitoring"]
+        NIC["Network Interface"]
+        CAPTURE["Scapy / Npcap Capture"]
+        PACKET["Packet Adapter"]
+        FLOW["Flow Aggregator"]
+        TIMEOUT["Flow Timeout"]
+        ADAPTER["UNSW-NB15 Feature Adapter"]
+    end
+
+    subgraph BACKEND["⚙️ FastAPI Backend"]
+        API["REST API"]
+        INFERENCE["Inference Service"]
+        DB["SQLite Database"]
+        WS["WebSocket Alert Manager"]
+    end
+
+    subgraph FRONTEND["🖥️ React Dashboard"]
+        DASH["Dashboard"]
+        DET["Detection History"]
+        ANALYTICS["Analytics"]
+        MODEL["Model Metrics"]
+        LIVEUI["Live Monitoring"]
+    end
+
+    DATASET --> AUDIT
+    AUDIT --> PREPROCESS
+    PREPROCESS --> MODELS
+    MODELS --> BINARY
+    MODELS --> MULTI
+
+    NIC --> CAPTURE
+    CAPTURE --> PACKET
+    PACKET --> FLOW
+    FLOW --> TIMEOUT
+    TIMEOUT --> ADAPTER
+    ADAPTER --> PREPROCESS
+
+    BINARY --> INFERENCE
+    MULTI --> INFERENCE
+    PREPROCESS --> INFERENCE
+
+    INFERENCE --> DB
+    INFERENCE --> WS
+
+    API --> INFERENCE
+    API --> DB
+
+    DB --> DASH
+    DB --> DET
+    DB --> ANALYTICS
+    MODEL --> API
+    WS --> LIVEUI
+    API --> LIVEUI
+
+    DASH --> API
+    DET --> API
+    ANALYTICS --> API
+    MODEL --> API
+```
+
+### Data Flow
+
+#### Dataset Prediction
+
+```text
+UNSW-NB15 Record
+       │
+       ▼
+Feature Validation
+       │
+       ▼
+Preprocessing
+       │
+       ├── Numeric → Median Imputation → StandardScaler
+       │
+       └── Categorical → Most-Frequent Imputation → OneHotEncoder
+       │
+       ▼
+192 Transformed Features
+       │
+       ├───────────────┐
+       ▼               ▼
+Binary XGBoost    Multiclass XGBoost
+       │               │
+       ▼               ▼
+Normal / Attack   Attack Category
+       │               │
+       └───────┬───────┘
+               ▼
+        Confidence + Severity
+               │
+               ▼
+        SQLite Persistence
+               │
+        ┌──────┴──────┐
+        ▼             ▼
+      REST API    WebSocket Alert
+        │             │
+        └──────┬──────┘
+               ▼
+        React Dashboard
+```
+
+#### Live Monitoring
+
+```text
+Authorized Network Interface
+            │
+            ▼
+      Scapy / Npcap
+            │
+            ▼
+      Packet Adapter
+            │
+            ▼
+      Flow Aggregator
+            │
+            ▼
+       Flow Timeout
+            │
+            ▼
+   UNSW-NB15 Feature Adapter
+            │
+            ▼
+       ML Preprocessor
+            │
+            ▼
+    Binary + Multiclass Model
+            │
+            ▼
+       Prediction Event
+            │
+       ┌────┴─────┐
+       ▼          ▼
+    SQLite    WebSocket
+       │          │
+       └────┬─────┘
+            ▼
+      React Dashboard
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer                   | Technology         | Purpose                                                    |
+| :---------------------- | :----------------- | :--------------------------------------------------------- |
+| **Language**            | Python 3.12        | ML, backend, data processing                               |
+| **Data Processing**     | pandas 3.0.5       | Dataset loading and transformation                         |
+| **Numerical Computing** | NumPy 2.5.3        | Numerical operations                                       |
+| **ML Framework**        | scikit-learn 1.9.1 | Preprocessing, Logistic Regression, Random Forest, metrics |
+| **Primary ML Model**    | XGBoost 3.4.1      | Binary and multiclass classification                       |
+| **Serialization**       | joblib 1.6.0       | Model and preprocessing artifact storage                   |
+| **Backend Framework**   | FastAPI 0.141.1    | REST inference API                                         |
+| **Server**              | Uvicorn 0.53.0     | ASGI application server                                    |
+| **Validation**          | Pydantic 2.13.5    | API request/response validation                            |
+| **Database ORM**        | SQLAlchemy 2.0.43  | Database persistence layer                                 |
+| **Database**            | SQLite             | Local prediction history                                   |
+| **Live Capture**        | Scapy 2.7.0        | Network packet capture and processing                      |
+| **Windows Capture**     | Npcap              | Packet capture driver                                      |
+| **WebSocket**           | websockets 17.1    | Automated WebSocket testing                                |
+| **Frontend**            | React + TypeScript | Dashboard UI                                               |
+| **Build Tool**          | Vite 8.3.0         | Frontend development and production builds                 |
+| **Version Control**     | Git                | Source control and project history                         |
+
+---
+
+## 📊 Dataset & Machine Learning
+
+### Dataset
+
+The primary dataset is **UNSW-NB15**.
+
+The implemented model excludes:
+
+* `id` as an identifier
+* `label` as the binary target
+* `attack_cat` as the multiclass target
+
+The resulting input contains:
+
+* **42 raw model features**
+* **39 numeric features**
+* **3 categorical features**
+
+Categorical features:
+
+```text
+proto
+service
+state
+```
+
+The preprocessing pipeline transforms these into:
+
+```text
+192 model-ready features
+```
+
+### Dataset Split
+
+| Dataset Partition |    Rows | Purpose                                |
+| :---------------- | ------: | :------------------------------------- |
+| Training          | 140,272 | Model training + preprocessing fitting |
+| Validation        |  35,069 | Model comparison and selection         |
+| Official Test     |  82,332 | Final held-out evaluation              |
+
+The training data is split using stratification with:
+
+```text
+random_state = 42
+```
+
+The preprocessing pipeline is fitted **only on the training partition**.
+
+The official test set remains untouched during model selection.
+
+### Data Quality Audit
+
+The supplied dataset was audited before preprocessing.
+
+| Check          | Training | Testing |
+| :------------- | -------: | ------: |
+| Missing Values |        0 |       0 |
+| Duplicate Rows |        0 |       0 |
+| Rows           |  175,341 |  82,332 |
+| Columns        |       45 |      45 |
+
+---
+
+## 🔒 Leakage-Safe Preprocessing
+
+The preprocessing pipeline follows:
+
+```text
+Raw Dataset
+     │
+     ▼
+Data Audit
+     │
+     ▼
+Remove id / label / attack_cat
+     │
+     ▼
+Stratified Train / Validation Split
+     │
+     ▼
+Fit Preprocessor ONLY on Training Data
+     │
+     ├── Numeric
+     │      ├── Median Imputation
+     │      └── StandardScaler
+     │
+     └── Categorical
+            ├── Most-Frequent Imputation
+            └── OneHotEncoder
+                    │
+                    ▼
+             192 Features
+```
+
+This prevents validation or official test information from being used to calculate preprocessing parameters.
+
+The preprocessor is serialized as:
+
+```text
+backend/ml/artifacts/preprocessor.joblib
+```
+
+---
+
+## 🤖 Model Training
+
+Three binary classification approaches were compared:
+
+1. Logistic Regression
+2. Random Forest
+3. XGBoost
+
+The selection metric was **validation F1 score**.
+
+### Binary Validation Results
+
+| Model               | Accuracy | Precision |   Recall |           F1 | False Positive Rate |
+| :------------------ | -------: | --------: | -------: | -----------: | ------------------: |
+| Logistic Regression | 0.932533 |  0.949948 | 0.950982 |     0.950465 |            0.106786 |
+| Random Forest       | 0.957170 |  0.973656 | 0.963132 |     0.968366 |            0.055536 |
+| XGBoost             | 0.962132 |  0.967094 | 0.977628 | **0.972332** |            0.070893 |
+
+XGBoost was selected as the primary binary inference model based on the highest validation F1 score among the compared models.
+
+### Binary Model
+
+```text
+XGBoost
+├── n_estimators: 300
+├── learning_rate: 0.10
+├── max_depth: 8
+├── subsample: 0.80
+├── colsample_bytree: 0.80
+├── objective: binary:logistic
+├── tree_method: hist
+└── random_state: 42
+```
+
+---
+
+## 🎯 Multiclass Detection
+
+The multiclass classifier predicts ten UNSW-NB15 categories:
+
+```text
+Analysis
+Backdoor
+DoS
+Exploits
+Fuzzers
+Generic
+Normal
+Reconnaissance
+Shellcode
+Worms
+```
+
+### Multiclass Validation Results
+
+| Metric             |    Score |
+| :----------------- | -------: |
+| Accuracy           | 0.833984 |
+| Weighted Precision | 0.831544 |
+| Weighted Recall    | 0.833984 |
+| Weighted F1        | 0.820354 |
+| Macro F1           | 0.618551 |
+
+The gap between weighted F1 and macro F1 reflects the substantial class imbalance in the dataset, particularly among rare attack categories.
+
+The system therefore exposes per-class metrics rather than relying exclusively on overall accuracy.
+
+---
+
+## 🧪 Official Test Evaluation
+
+The official UNSW-NB15 test set contains **82,332 rows** and was not used during model selection.
+
+It was evaluated only after the model and preprocessing pipeline had been finalized.
+
+### Binary Official Test Results
+
+| Metric              |   Result |
+| :------------------ | -------: |
+| Accuracy            | 0.871496 |
+| Precision           | 0.820437 |
+| Recall              | 0.981404 |
+| F1                  | 0.893730 |
+| False Positive Rate | 0.263162 |
+
+Confusion matrix:
+
+```text
+                 Predicted
+                 Normal   Attack
+
+Actual Normal     27263     9737
+Actual Attack       843    44489
+```
+
+### Multiclass Official Test Results
+
+| Metric             |   Result |
+| :----------------- | -------: |
+| Accuracy           | 0.765595 |
+| Weighted Precision | 0.835789 |
+| Weighted Recall    | 0.765595 |
+| Weighted F1        | 0.779305 |
+| Macro F1           | 0.513651 |
+
+The lower macro F1 indicates significantly weaker performance on several rare attack classes compared with the dominant categories.
+
+This is an important limitation of the current model and is intentionally exposed rather than hidden behind the overall accuracy number.
+
+---
+
+## 🧠 Model Feature Importance
+
+The trained binary XGBoost model exposes transformed feature importance through the backend API and React dashboard.
+
+Important transformed features include:
+
+```text
+sttl
+ct_state_ttl
+dttl
+proto_tcp
+proto_unas
+service_dns
+state_CON
+proto_rvd
+ct_dst_sport_ltm
+proto_cbt
+```
+
+Feature importance is calculated from the trained XGBoost model using the transformed feature names generated by the preprocessing pipeline.
+
+---
+
+## ⚙️ Backend API
+
+The FastAPI backend exposes the following services.
+
+### Health
+
+```text
+GET /health
+```
+
+Returns API health information.
+
+### Dashboard Summary
+
+```text
+GET /api/dashboard/summary
+```
+
+Returns aggregate detection statistics and recent events.
+
+### Prediction
+
+```text
+POST /api/predict
+```
+
+Runs binary and multiclass inference and persists the resulting prediction event.
+
+Request structure:
+
+```json
+{
+  "mode": "dataset",
+  "features": {
+    "...": "complete UNSW-NB15 feature set"
+  }
+}
+```
 
-# &#x20;              └── Attack Category
+The complete feature schema is required for inference.
+
+### Batch Prediction
+
+```text
+POST /api/predict/batch
+```
+
+Runs multiple predictions in one request.
+
+### Detection History
+
+```text
+GET /api/detections
+```
+
+Returns persisted detection events with pagination and filtering support.
+
+### Detection Detail
+
+```text
+GET /api/detections/{id}
+```
+
+Returns an individual detection event.
+
+### Detection Export
+
+```text
+GET /api/detections/export.csv
+```
+
+Exports persisted detections as CSV.
+
+### Attack Analytics
+
+```text
+GET /api/analytics/attacks
+```
+
+Returns attack-category statistics.
+
+### Model Metrics
+
+```text
+GET /api/model/metrics
+```
+
+Returns model evaluation information.
+
+### Model Features
+
+```text
+GET /api/model/features
+```
+
+Returns transformed feature importance information.
+
+### Live Status
+
+```text
+GET /live/status
+```
+
+Returns current live-monitoring status and configuration.
+
+### Start Live Monitoring
+
+```text
+POST /live/start
+```
+
+Starts controlled packet capture using the configured network interface.
+
+### Stop Live Monitoring
+
+```text
+POST /live/stop
+```
+
+Stops live packet capture safely.
+
+### WebSocket Alerts
+
+```text
+WS /ws/alerts
+```
+
+Connected dashboard clients receive newly generated prediction events through WebSocket broadcasts.
+
+---
+
+## 🗄️ Database
+
+NIDS-ML uses SQLite for local prediction persistence.
+
+The primary prediction-event record contains:
+
+```text
+id
+timestamp
+mode
+source_ip
+destination_ip
+protocol
+binary_prediction
+binary_label
+binary_confidence
+attack_category
+multiclass_confidence
+severity
+model_version
+```
+
+The database allows the frontend to display historical detections rather than relying on temporary in-memory statistics.
+
+---
+
+## 🌐 Live Monitoring
+
+NIDS-ML supports controlled live network monitoring using:
+
+```text
+Scapy
+Npcap
+Network Interface
+Flow Aggregation
+UNSW-NB15 Feature Adapter
+XGBoost
+```
+
+The live monitoring pipeline is:
+
+```text
+Network Interface
+       │
+       ▼
+Scapy / Npcap
+       │
+       ▼
+Packet Adapter
+       │
+       ▼
+Flow Aggregator
+       │
+       ▼
+Flow Timeout
+       │
+       ▼
+Feature Adapter
+       │
+       ▼
+Preprocessor
+       │
+       ▼
+Binary + Multiclass XGBoost
+       │
+       ▼
+Prediction Event
+       │
+       ├── SQLite
+       │
+       └── WebSocket
+              │
+              ▼
+       React Dashboard
+```
+
+### Live Configuration
+
+The live interface and timeout are configured through `.env`:
+
+```env
+NIDS_LIVE_INTERFACE=YOUR_NETWORK_INTERFACE
+NIDS_LIVE_FLOW_TIMEOUT=5
+```
+
+The interface value must correspond to a valid Scapy/Npcap interface on the machine.
+
+### Live Feature Limitations
+
+UNSW-NB15 contains features that depend on flow context and application-layer information.
+
+Some values cannot be reconstructed exactly from arbitrary captured packets and are therefore approximated or tracked using short-term context.
+
+Examples include:
+
+```text
+sloss
+dloss
+trans_depth
+response_body_len
+is_ftp_login
+ct_ftp_cmd
+ct_flw_http_mthd
+```
+
+Several `ct_*` contextual features are also maintained using short-term live-flow tracking.
+
+Therefore, live-mode predictions should **not** be interpreted as mathematically identical to offline predictions on native UNSW-NB15 records.
+
+Live monitoring is intended as a controlled demonstration and monitoring pipeline rather than a claim of perfect reproduction of every UNSW-NB15 feature semantic.
 
-# &#x20;       │
+---
+
+## 🚨 Severity System
 
-# &#x20;       ▼
+Predictions are assigned a severity level for dashboard presentation and triage.
 
-# FastAPI Inference Layer
+Severity incorporates prediction information such as:
 
-# &#x20;       │
+* Binary classification
+* Attack category
+* Model confidence
 
-# &#x20;       ├── SQLite Persistence
+Severity is a presentation and prioritization signal.
 
-# &#x20;       ├── REST API
+It is **not** an automated response mechanism and does not trigger network blocking.
 
-# &#x20;       └── WebSocket Alerts
+---
 
-# &#x20;       │
+## 🖥️ Frontend Dashboard
 
-# &#x20;       ▼
+The React dashboard provides:
 
-# React Dashboard
+* System/API status
+* WebSocket connection status
+* Dashboard summary
+* Total detection count
+* Malicious detection count
+* Normal traffic count
+* Threat rate
+* High-severity detection count
+* Recent detections
+* Detection search
+* Detection filtering
+* Detection details
+* Attack-category analytics
+* Model evaluation metrics
+* Feature importance
+* Live capture controls
+* Live detection updates
+* WebSocket alerts
+* CSV detection export
+* System configuration information
+* Loading states
+* API error handling
 
-# &#x20;       │
+The frontend retrieves data from the FastAPI backend rather than displaying hard-coded detection statistics.
 
-# &#x20;       ├── Dashboard
+---
 
-# &#x20;       ├── Detections
+## ⚙️ Setup & Installation
 
-# &#x20;       ├── Analytics
+### Prerequisites
 
-# &#x20;       ├── Model Metrics
+Recommended environment:
 
-# &#x20;       └── Live Monitoring
+* **Python 3.12.x**
+* **Node.js 24.x**
+* **npm 11.x**
+* **Git**
 
-# Features
+For live packet monitoring on Windows:
 
-# UNSW-NB15 based intrusion detection
+* **Npcap**
+* A supported network interface
+* Appropriate permissions for packet capture
 
-# Leakage-safe preprocessing pipeline
+Dataset-only inference does not require live packet capture.
 
-# Binary Normal/Attack classification
+### 1. Clone the Repository
 
-# Multiclass attack-category classification
+```bash
+git clone https://github.com/santanu949/NIDS.git
+cd NIDS
+```
 
-# Logistic Regression, Random Forest, and XGBoost comparison
+### 2. Create the Python Environment
 
-# XGBoost-based production inference
+Windows PowerShell:
 
-# FastAPI REST API
+```powershell
+python -m venv .venv
+```
 
-# Pydantic request/response validation
+Activate it:
 
-# SQLite prediction history
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
 
-# Detection filtering and detail views
+### 3. Install Backend Dependencies
 
-# CSV detection export
+```powershell
+pip install -r backend\requirements.txt
+```
 
-# Attack analytics
+### 4. Configure Environment Variables
 
-# Model metrics and feature importance
+Copy:
 
-# WebSocket real-time prediction alerts
+```text
+.env.example
+```
 
-# Controlled live packet capture using Scapy/Npcap
+to:
 
-# Flow aggregation before inference
+```text
+.env
+```
 
-# Live monitoring start/stop controls
+Configure the live interface if live monitoring is required:
 
-# React + TypeScript dashboard
+```env
+NIDS_LIVE_INTERFACE=YOUR_NETWORK_INTERFACE
+NIDS_LIVE_FLOW_TIMEOUT=5
+```
 
-# Dataset and live prediction modes
+For dataset-only usage, the live interface does not need to be configured.
 
-# Environment-based live-capture configuration
+### 5. Start the Backend
 
-# Technology Stack
+From the project root:
 
-# Machine Learning
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.api.main:app --reload --port 8000
+```
 
-# Python 3.12
+FastAPI will be available at:
 
-# pandas
+```text
+http://127.0.0.1:8000
+```
 
-# NumPy
+Interactive API documentation:
 
-# scikit-learn
+```text
+http://127.0.0.1:8000/docs
+```
 
-# XGBoost
+### 6. Install Frontend Dependencies
 
-# joblib
+Open a second terminal:
 
-# SciPy
+```powershell
+cd frontend
+npm install
+```
 
-# Backend
+### 7. Start the Frontend
 
-# FastAPI
+```powershell
+npm run dev
+```
 
-# Uvicorn
+The Vite development server normally runs at:
 
-# Pydantic
+```text
+http://localhost:5173
+```
 
-# SQLAlchemy
+### 8. Build the Frontend
 
-# SQLite
+For a production frontend build:
 
-# WebSockets
+```powershell
+npm run build
+```
 
-# Live Monitoring
+The generated production assets are placed in:
 
-# Scapy
+```text
+frontend/dist/
+```
 
-# Npcap
+---
+
+## 📖 Usage Guide
+
+### Dataset Prediction
+
+1. Start the FastAPI backend.
+2. Start the React frontend.
+3. Open the dashboard.
+4. Submit a valid UNSW-NB15 feature record.
+5. The backend validates the request.
+6. The preprocessing artifact transforms the input.
+7. Binary XGBoost predicts Normal/Attack.
+8. Multiclass XGBoost predicts the attack category.
+9. Confidence and severity are calculated.
+10. The prediction is stored in SQLite.
+11. The dashboard displays the resulting detection.
+
+### Detection History
+
+The Detections section provides access to stored prediction events.
+
+Users can:
+
+* Search detections
+* Filter results
+* Inspect individual events
+* Review confidence values
+* Review attack categories
+* Review severity
+* Export detection history as CSV
+
+### Analytics
+
+The Analytics section exposes aggregate attack-category information based on persisted prediction events.
+
+### Model
+
+The Model section provides:
+
+* Model-selection information
+* Binary model metrics
+* Multiclass metrics
+* Official test-set evaluation availability
+* Feature importance
+* Dataset information
+* Transformed feature count
+
+### Live Monitoring
+
+1. Configure a valid Npcap interface.
+2. Start the FastAPI backend.
+3. Open the React dashboard.
+4. Start live monitoring.
+5. Scapy captures authorized traffic.
+6. Packets are aggregated into flows.
+7. Finalized flows are converted into model-compatible features.
+8. The ML pipeline generates predictions.
+9. Results are stored in SQLite.
+10. WebSocket alerts update connected dashboards.
+11. Stop monitoring when finished.
+
+Live capture should only be performed on networks and systems for which the operator has authorization.
+
+---
+
+## 📁 Project Structure
+
+```text
+NIDS/
+│
+├── backend/
+│   │
+│   ├── api/
+│   │   ├── inference.py
+│   │   ├── main.py
+│   │   ├── schemas.py
+│   │   └── websocket.py
+│   │
+│   ├── app/
+│   │   ├── config.py
+│   │   ├── database.py
+│   │   └── models/
+│   │       └── prediction_event.py
+│   │
+│   ├── data/
+│   │   ├── raw/
+│   │   │   ├── UNSW_NB15_training-set.csv
+│   │   │   └── UNSW_NB15_testing-set.csv
+│   │   ├── audit_report.json
+│   │   ├── audit_report.txt
+│   │   └── feature_schema.json
+│   │
+│   ├── live/
+│   │   ├── capture.py
+│   │   ├── context_tracker.py
+│   │   ├── flow_adapter.py
+│   │   ├── flow_aggregator.py
+│   │   ├── flow_manager.py
+│   │   ├── packet_adapter.py
+│   │   ├── predict_live.py
+│   │   └── service.py
+│   │
+│   ├── ml/
+│   │   ├── artifacts/
+│   │   ├── audit.py
+│   │   ├── evaluate_official_test.py
+│   │   ├── preprocess.py
+│   │   └── validate.py
+│   │
+│   └── requirements.txt
+│
+├── docs/
+│   ├── data-preprocessing.md
+│   └── phase2_report.md
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── api.ts
+│   │   └── ...
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── tests/
+│   ├── test_api.py
+│   ├── test_ml_pipeline.py
+│   └── test_websocket.py
+│
+├── .env.example
+├── .gitignore
+└── README.md
+```
 
-# Flow aggregation and timeout-based flow finalization
+---
 
-# Frontend
+## 🧪 Testing
 
-# React
+The project includes automated tests covering the ML pipeline, API, and WebSocket functionality.
 
-# TypeScript
+### ML Pipeline Tests
 
-# Vite
+```text
+7/7 passed
+```
 
-# CSS
+Coverage includes preprocessing/model artifact behavior and ML pipeline validation.
 
-# Project Structure
+### API Tests
 
-# NIDS-ML/
+```text
+13/13 passed
+```
 
-# │
+Coverage includes:
 
-# ├── backend/
+* Health endpoint
+* Prediction contract
+* Batch prediction
+* Detection persistence
+* Detection listing
+* Dashboard summary
+* Analytics
+* Model metrics
+* Feature importance
+* Live status/control behavior
+* Validation/error handling
 
-# │   ├── api/
+### WebSocket Tests
 
-# │   │   ├── inference.py
+```text
+1/1 passed
+```
 
-# │   │   ├── main.py
+The test verifies that a prediction event is broadcast to a connected WebSocket client.
 
-# │   │   ├── schemas.py
+### Full Test Suite
 
-# │   │   └── websocket.py
+```text
+21/21 passed
+```
 
-# │   │
+Full discovery command:
 
-# │   ├── app/
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py" -v
+```
 
-# │   │   ├── config.py
+---
 
-# │   │   ├── database.py
+## 🔐 Security & Ethical Considerations
 
-# │   │   └── models/
+NIDS-ML is intended for defensive security research, education, and controlled network monitoring.
 
-# │   │       └── prediction\_event.py
+### Authorized Monitoring
 
-# │   │
+Live packet capture should only be performed on systems and networks where the operator has explicit authorization.
 
-# │   ├── data/
+### No Automated Blocking
 
-# │   │   ├── raw/
+The current implementation does not automatically:
 
-# │   │   │   └── UNSW-NB15 CSV files
+* Block IP addresses
+* Terminate connections
+* Modify firewall rules
+* Launch countermeasures
 
-# │   │   ├── audit\_report.json
+The system is detection and monitoring focused.
 
-# │   │   ├── audit\_report.txt
+### Controlled Attack Testing
 
-# │   │   └── feature\_schema.json
+Attack traffic used for demonstrations should be generated only inside an authorized and isolated environment.
 
-# │   │
+### Sensitive Information
 
-# │   ├── live/
+The project should avoid storing unnecessary packet payloads, credentials, secrets, or other sensitive information in logs.
 
-# │   │   ├── capture.py
+Flow metadata should be preferred wherever possible.
 
-# │   │   ├── context\_tracker.py
+---
 
-# │   │   ├── flow\_adapter.py
+## ⚠️ Limitations
 
-# │   │   ├── flow\_aggregator.py
+The current system has several important limitations.
 
-# │   │   ├── flow\_manager.py
+### Dataset Limitations
 
-# │   │   ├── packet\_adapter.py
+UNSW-NB15 is a benchmark dataset and does not represent every modern network environment.
 
-# │   │   ├── predict\_live.py
+Real-world traffic distributions may differ significantly from the training and testing distributions.
 
-# │   │   └── service.py
+### Class Imbalance
 
-# │   │
+Rare attack categories have substantially fewer examples than dominant categories.
 
-# │   ├── ml/
+This contributes to the lower macro F1 score observed during multiclass evaluation.
 
-# │   │   ├── artifacts/
+### Live Feature Approximation
 
-# │   │   ├── audit.py
+Some UNSW-NB15 features cannot be reproduced exactly from arbitrary live packet captures.
 
-# │   │   ├── preprocess.py
+The live adapter therefore uses approximations and short-term context tracking for selected fields.
 
-# │   │   └── validate.py
+### Model Confidence
 
-# │   │
+A confidence value produced by the classifier should not be interpreted as a calibrated real-world probability that traffic is malicious.
 
-# │   └── requirements.txt
+### No Automated Response
 
-# │
+The system currently detects and records threats but does not automatically block or remediate them.
 
-# ├── docs/
+### Capture Environment
 
-# │   ├── data-preprocessing.md
+Live monitoring depends on:
 
-# │   └── phase2\_report.md
+* Operating system support
+* Npcap
+* Scapy
+* Network-interface compatibility
+* Appropriate permissions
 
-# │
+---
 
-# ├── frontend/
+## 📚 Documentation
 
-# │   ├── src/
+Additional technical documentation is maintained under:
 
-# │   │   ├── App.tsx
+```text
+docs/
+```
 
-# │   │   ├── api.ts
+Current documentation includes:
 
-# │   │   └── ...
+* Data preprocessing methodology
+* Phase 2 validation and reporting
+* Dataset audit information
+* Model evaluation artifacts
+* Official test-set evaluation results
 
-# │   ├── package.json
+The repository also contains serialized model/preprocessing artifacts required by the inference pipeline where included by the project distribution.
 
-# │   └── vite.config.ts
+---
 
-# │
+## 🔄 Development Workflow
 
-# ├── .env.example
+The project was implemented through the following major phases:
 
-# ├── .gitignore
+| Phase | Description                        | Status     |
+| :---- | :--------------------------------- | :--------- |
+| 1     | Environment + Repository           | ✅ Complete |
+| 2     | Dataset Acquisition + Data Audit   | ✅ Complete |
+| 3     | Leakage-Safe Preprocessing         | ✅ Complete |
+| 4     | Train + Compare ML Models          | ✅ Complete |
+| 5     | Binary + Multiclass Detection      | ✅ Complete |
+| 6     | FastAPI Inference API              | ✅ Complete |
+| 7     | Database Persistence               | ✅ Complete |
+| 8     | React Dashboard                    | ✅ Complete |
+| 9     | Live Monitoring + Alerts           | ✅ Complete |
+| 10    | Testing + Security + Documentation | ✅ Complete |
 
-# └── README.md
+---
 
-# Dataset
+## 📈 Current Status
 
-# 
+| Module                     | Status           |
+| :------------------------- | :--------------- |
+| UNSW-NB15 Dataset Audit    | 🟢 Complete      |
+| Leakage-Safe Preprocessing | 🟢 Complete      |
+| Binary Classification      | 🟢 Complete      |
+| Multiclass Classification  | 🟢 Complete      |
+| XGBoost Inference          | 🟢 Complete      |
+| FastAPI Backend            | 🟢 Complete      |
+| SQLite Persistence         | 🟢 Complete      |
+| React Dashboard            | 🟢 Complete      |
+| Detection History          | 🟢 Complete      |
+| Analytics                  | 🟢 Complete      |
+| WebSocket Alerts           | 🟢 Complete      |
+| Controlled Live Monitoring | 🟢 Complete      |
+| Automated Tests            | 🟢 21/21 Passing |
+| Production Frontend Build  | 🟢 Passing       |
+| Official Test Evaluation   | 🟢 Complete      |
+| Documentation              | 🟢 Complete      |
 
-# The primary dataset is UNSW-NB15.
+---
 
-# 
+## 👤 Contributor
 
-# The dataset contains network-flow features and labels for normal and malicious traffic.
+<div align="center">
 
-# 
+<a href="https://github.com/santanu949">
+  <img src="https://github.com/santanu949.png" width="80px;" alt="Santanu"/>
+  <br />
+  <sub><b>Santanu Samanta</b></sub>
+</a>
 
-# The implemented pipeline uses:
+<br/>
 
-# 
+Creator & Lead Developer
 
-# id as an identifier and excludes it from model features.
+</div>
 
-# label as the binary target.
+---
 
-# attack\_cat as the multiclass target.
+<div align="center">
 
-# 42 raw model input features after excluding id, label, and attack\_cat.
+<br/>
 
-# 39 numeric features.
+**NIDS-ML**
 
-# 3 categorical features:
+*Machine Learning for Network Intrusion Detection*
 
-# proto
+<br/>
 
-# service
+<sub>Built for defensive security research, education, and controlled network monitoring.</sub>
 
-# state
-
-# 
-
-# The preprocessing pipeline produces 192 transformed features.
-
-# 
-
-# Dataset Split
-
-# 
-
-# The supplied UNSW-NB15 training data is divided into:
-
-# 
-
-# Training partition:    140,272 rows
-
-# Validation partition:  35,069 rows
-
-# Official test set:     82,332 rows
-
-# 
-
-# The validation split uses stratification with random\_state=42.
-
-# 
-
-# Preprocessing is fitted only on the training partition.
-
-# 
-
-# The official UNSW-NB15 test set remains untouched during model selection.
-
-# 
-
-# Data Quality and Leakage Controls
-
-# 
-
-# The dataset audit verified:
-
-# 
-
-# No missing values in the supplied training data.
-
-# No missing values in the supplied testing data.
-
-# Zero duplicate rows in the supplied training data.
-
-# Zero duplicate rows in the supplied testing data.
-
-# 
-
-# The preprocessing workflow follows:
-
-# 
-
-# Raw Data
-
-# &#x20;  │
-
-# &#x20;  ▼
-
-# Audit
-
-# &#x20;  │
-
-# &#x20;  ▼
-
-# Remove identifier / target columns
-
-# &#x20;  │
-
-# &#x20;  ▼
-
-# Train / Validation Split
-
-# &#x20;  │
-
-# &#x20;  ▼
-
-# Fit preprocessing on training partition only
-
-# &#x20;  │
-
-# &#x20;  ├── Numeric → Median Imputation → StandardScaler
-
-# &#x20;  │
-
-# &#x20;  └── Categorical → Most-Frequent Imputation → OneHotEncoder
-
-# &#x20;                                     │
-
-# &#x20;                                     ▼
-
-# &#x20;                             Transformed Features
-
-# 
-
-# This prevents validation/test information from being used to fit preprocessing parameters.
-
-# 
-
-# Machine Learning
-
-# 
-
-# Three binary classification approaches were compared:
-
-# 
-
-# Logistic Regression
-
-# Random Forest
-
-# XGBoost
-
-# 
-
-# The primary model was selected using validation F1 score rather than accuracy alone.
-
-# 
-
-# Binary Validation Results
-
-# Model	Accuracy	Precision	Recall	F1	False Positive Rate
-
-# Logistic Regression	0.932533	0.949948	0.950982	0.950465	0.106786
-
-# Random Forest	0.957170	0.973656	0.963132	0.968366	0.055536
-
-# XGBoost	0.962132	0.967094	0.977628	0.972332	0.070893
-
-# 
-
-# XGBoost was selected as the primary binary inference model because it achieved the highest validation F1 score among the compared models.
-
-# 
-
-# The model configuration is documented in the project training artifacts and reports.
-
-# 
-
-# Multiclass Detection
-
-# 
-
-# The multiclass model predicts ten UNSW-NB15 categories:
-
-# 
-
-# Analysis
-
-# Backdoor
-
-# DoS
-
-# Exploits
-
-# Fuzzers
-
-# Generic
-
-# Normal
-
-# Reconnaissance
-
-# Shellcode
-
-# Worms
-
-# 
-
-# The multiclass XGBoost model uses the same leakage-safe preprocessing pipeline.
-
-# 
-
-# Multiclass Validation Results
-
-# Accuracy:          0.833984
-
-# Weighted Precision: 0.831544
-
-# Weighted Recall:    0.833984
-
-# Weighted F1:        0.820354
-
-# Macro F1:           0.618551
-
-# 
-
-# The difference between weighted F1 and macro F1 reflects the strong class imbalance in UNSW-NB15, particularly for rare categories such as Worms, Shellcode, Backdoor, and Analysis.
-
-# 
-
-# The project therefore reports per-class metrics rather than relying only on overall accuracy.
-
-# 
-
-# Model Feature Importance
-
-# 
-
-# The binary XGBoost model's transformed feature importance is available through the API and dashboard.
-
-# 
-
-# The most influential transformed features in the trained model include:
-
-# 
-
-# sttl
-
-# ct\_state\_ttl
-
-# dttl
-
-# proto\_tcp
-
-# proto\_unas
-
-# service\_dns
-
-# state\_CON
-
-# proto\_rvd
-
-# ct\_dst\_sport\_ltm
-
-# proto\_cbt
-
-# 
-
-# The importance values are calculated from the trained XGBoost model using the transformed feature names generated by the preprocessing pipeline.
-
-# 
-
-# Backend API
-
-# 
-
-# The FastAPI backend provides the following endpoints.
-
-# 
-
-# Health
-
-# GET /health
-
-# 
-
-# Returns service health information.
-
-# 
-
-# Dashboard Summary
-
-# GET /api/dashboard/summary
-
-# 
-
-# Returns aggregate dashboard statistics and recent detection events.
-
-# 
-
-# Prediction
-
-# POST /api/predict
-
-# 
-
-# Runs binary and multiclass inference and persists the prediction.
-
-# 
-
-# Example request:
-
-# 
-
-# {
-
-# &#x20; "mode": "dataset",
-
-# &#x20; "features": {
-
-# &#x20;   "dur": 0.1,
-
-# &#x20;   "proto": "tcp",
-
-# &#x20;   "service": "http",
-
-# &#x20;   "state": "FIN"
-
-# &#x20; }
-
-# }
-
-# 
-
-# The complete feature schema must be supplied for inference.
-
-# 
-
-# Batch Prediction
-
-# POST /api/predict/batch
-
-# 
-
-# Runs multiple predictions in a single request.
-
-# 
-
-# Detection History
-
-# GET /api/detections
-
-# 
-
-# Supports querying stored prediction events.
-
-# 
-
-# Detection Detail
-
-# GET /api/detections/{id}
-
-# 
-
-# Returns a specific persisted detection.
-
-# 
-
-# Detection Export
-
-# GET /api/detections/export.csv
-
-# 
-
-# Exports persisted detections as CSV.
-
-# 
-
-# Attack Analytics
-
-# GET /api/analytics/attacks
-
-# 
-
-# Returns attack-category statistics.
-
-# 
-
-# Model Metrics
-
-# GET /api/model/metrics
-
-# 
-
-# Returns the stored model evaluation information.
-
-# 
-
-# Model Features
-
-# GET /api/model/features
-
-# 
-
-# Returns transformed feature importance information.
-
-# 
-
-# Live Status
-
-# GET /live/status
-
-# 
-
-# Returns live-monitoring configuration and runtime status.
-
-# 
-
-# Live Start
-
-# POST /live/start
-
-# 
-
-# Starts controlled live packet capture using the configured interface.
-
-# 
-
-# Live Stop
-
-# POST /live/stop
-
-# 
-
-# Stops live capture safely.
-
-# 
-
-# WebSocket Alerts
-
-# WS /ws/alerts
-
-# 
-
-# Connected dashboard clients receive prediction events when new detections are persisted.
-
-# 
-
-# Database
-
-# 
-
-# SQLite is used for local persistence.
-
-# 
-
-# Prediction events contain fields including:
-
-# 
-
-# id
-
-# timestamp
-
-# mode
-
-# source\_ip
-
-# destination\_ip
-
-# protocol
-
-# binary\_prediction
-
-# binary\_label
-
-# binary\_confidence
-
-# attack\_category
-
-# multiclass\_confidence
-
-# severity
-
-# model\_version
-
-# 
-
-# The database allows the dashboard to display historical detections and analytics.
-
-# 
-
-# Live Monitoring
-
-# 
-
-# NIDS-ML supports controlled live packet capture using Scapy and Npcap.
-
-# 
-
-# The live pipeline is:
-
-# 
-
-# Network Interface
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Packet Capture
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Packet Adapter
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Flow Aggregation
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Flow Timeout
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# UNSW-NB15 Feature Adapter
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Preprocessing
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# Binary + Multiclass XGBoost
-
-# &#x20;      │
-
-# &#x20;      ▼
-
-# SQLite
-
-# &#x20;      │
-
-# &#x20;      ├── REST API
-
-# &#x20;      └── WebSocket
-
-# &#x20;             │
-
-# &#x20;             ▼
-
-# &#x20;       React Dashboard
-
-# Windows Requirements
-
-# 
-
-# Live packet capture requires:
-
-# 
-
-# Windows
-
-# Npcap
-
-# A supported network interface
-
-# Appropriate permissions for packet capture
-
-# Scapy
-
-# 
-
-# The interface is configured through .env.
-
-# 
-
-# Live Feature Limitations
-
-# 
-
-# The UNSW-NB15 dataset contains features that depend on flow context and application-layer information.
-
-# 
-
-# Some live-mode values are therefore approximated when they cannot be directly reconstructed from the captured traffic.
-
-# 
-
-# Examples include:
-
-# 
-
-# sloss
-
-# dloss
-
-# trans\_depth
-
-# response\_body\_len
-
-# is\_ftp\_login
-
-# ct\_ftp\_cmd
-
-# ct\_flw\_http\_mthd
-
-# 
-
-# Several contextual ct\_\* features are also maintained through short-term live-flow tracking.
-
-# 
-
-# Therefore:
-
-# 
-
-# Live-mode feature extraction is an approximation of the UNSW-NB15 feature semantics.
-
-# 
-
-# The system should not be interpreted as producing perfectly equivalent UNSW-NB15 features from arbitrary real-world traffic.
-
-# 
-
-# This limitation is important when interpreting live predictions.
-
-# 
-
-# Severity
-
-# 
-
-# Predictions are assigned a severity level for dashboard presentation.
-
-# 
-
-# The API considers binary classification, multiclass classification, and confidence when determining the displayed severity.
-
-# 
-
-# Severity is intended as a presentation/triage signal and is not an automated blocking mechanism.
-
-# 
-
-# Frontend
-
-# 
-
-# The React dashboard provides:
-
-# 
-
-# Dashboard overview
-
-# Live capture controls
-
-# Threat statistics
-
-# Recent detections
-
-# Detection history
-
-# Detection filtering
-
-# Detection details
-
-# CSV export
-
-# Attack-category analytics
-
-# Model performance information
-
-# Feature importance
-
-# Live WebSocket alerts
-
-# System/live configuration status
-
-# Loading and API error handling
-
-# 
-
-# The frontend communicates with FastAPI rather than using hard-coded detection statistics.
-
-# 
-
-# Installation
-
-# Requirements
-
-# 
-
-# Recommended environment:
-
-# 
-
-# Python 3.12.x
-
-# Node.js 24.x
-
-# npm 11.x
-
-# Git
-
-# 
-
-# For live monitoring on Windows:
-
-# 
-
-# Npcap
-
-# Clone
-
-# git clone https://github.com/santanu949/NIDS.git
-
-# cd NIDS
-
-# Backend Environment
-
-# 
-
-# Create the virtual environment:
-
-# 
-
-# python -m venv .venv
-
-# 
-
-# Activate it:
-
-# 
-
-# .\\.venv\\Scripts\\Activate.ps1
-
-# 
-
-# Install backend dependencies:
-
-# 
-
-# pip install -r backend\\requirements.txt
-
-# Environment Configuration
-
-# 
-
-# Copy .env.example to .env.
-
-# 
-
-# Configure the live network interface:
-
-# 
-
-# NIDS\_LIVE\_INTERFACE=YOUR\_NETWORK\_INTERFACE
-
-# NIDS\_LIVE\_FLOW\_TIMEOUT=5
-
-# 
-
-# The interface value must match a valid Scapy/Npcap interface on the machine.
-
-# 
-
-# For dataset-only use, live capture does not need to be started.
-
-# 
-
-# Start Backend
-
-# 
-
-# From the project root:
-
-# 
-
-# .\\.venv\\Scripts\\python.exe -m uvicorn backend.api.main:app --reload --port 8000
-
-# 
-
-# API documentation:
-
-# 
-
-# http://127.0.0.1:8000/docs
-
-# Frontend
-
-# 
-
-# Open a second terminal:
-
-# 
-
-# cd frontend
-
-# npm install
-
-# npm run dev
-
-# 
-
-# The Vite development server normally runs at:
-
-# 
-
-# http://localhost:5173/
-
-# Basic Verification
-
-# 
-
-# Check the backend:
-
-# 
-
-# GET /health
-
-# 
-
-# The expected response indicates that the API service is healthy.
-
-# 
-
-# The project can then be verified through:
-
-# 
-
-# Dashboard loading
-
-# Dataset prediction
-
-# Detection persistence
-
-# Detection history
-
-# Analytics
-
-# Model metrics
-
-# WebSocket alert delivery
-
-# Live capture start/stop
-
-# Live flow prediction when a supported capture environment is available
-
-# Security and Ethical Considerations
-
-# 
-
-# This project is intended for defensive security research, education, and controlled network monitoring.
-
-# 
-
-# Live packet capture should only be performed on systems and networks for which the operator has authorization.
-
-# 
-
-# The project does not implement automatic blocking or countermeasures.
-
-# 
-
-# The system should be deployed in an isolated or controlled environment when generating attack traffic for testing.
-
-# 
-
-# Sensitive payloads and credentials should not be stored in logs.
-
-# 
-
-# Flow metadata should be preferred over collecting unnecessary packet payload content.
-
-# 
-
-# Limitations
-
-# 
-
-# Important limitations include:
-
-# 
-
-# UNSW-NB15 is a benchmark dataset and does not represent every modern network environment.
-
-# Dataset distribution may differ from production traffic.
-
-# Rare attack classes have substantially less validation support.
-
-# Multiclass macro F1 is lower than weighted F1 because of class imbalance.
-
-# Live feature extraction approximates some UNSW-NB15 features.
-
-# Live predictions should therefore be interpreted as experimental/controlled monitoring rather than definitive forensic conclusions.
-
-# Model confidence is not equivalent to real-world probability of an attack.
-
-# No automated response or blocking mechanism is implemented.
-
-# Npcap/Scapy availability and interface permissions affect live monitoring.
-
-# Documentation
-
-# 
-
-# Additional project documentation is available under docs/.
-
-# 
-
-# Current documentation includes:
-
-# 
-
-# Data preprocessing methodology
-
-# Phase 2 validation/reporting
-
-# Model training and evaluation artifacts
-
-# Dataset audit information
-
-# Development Workflow
-
-# 
-
-# The project was implemented in phases:
-
-# 
-
-# 1\. Environment + Repository
-
-# 2\. Dataset Acquisition + Data Audit
-
-# 3\. Preprocessing Pipeline
-
-# 4\. Train + Compare ML Models
-
-# 5\. Binary + Multiclass Detection
-
-# 6\. FastAPI
-
-# 7\. Database
-
-# 8\. React Dashboard
-
-# 9\. Live Monitoring + Alerts
-
-# 10\. Testing, Security, Packaging + Documentation
-
-# 
-
-# Git history contains checkpoints for the major implementation phases.
-
-# 
-
-# Project Status
-
-# 
-
-# Core implementation:
-
-# 
-
-# Dataset audit                    Complete
-
-# Preprocessing                    Complete
-
-# Binary ML detection              Complete
-
-# Multiclass detection             Complete
-
-# FastAPI inference                Complete
-
-# Database persistence             Complete
-
-# React dashboard                  Complete
-
-# WebSocket alerts                 Complete
-
-# Controlled live monitoring       Complete
-
-# Dependency specification         Complete
-
-# 
-
-# Final academic documentation and submission artifacts may continue to evolve independently of the core implementation.
-
-# 
-
-# License
-
-# 
-
-# This repository does not currently declare a software license.
-
-# 
-
-# If the project is intended for public reuse or distribution, an appropriate license should be added after confirming the licensing requirements of the dataset, dependencies, and project contributors.
-
-# 
-
-# Disclaimer
-
-# 
-
-# NIDS-ML is a machine-learning based intrusion detection research and demonstration system.
-
-# 
-
-# Its predictions should not be treated as definitive evidence of malicious activity.
-
-# 
-
-# The system is intended to assist monitoring and analysis, not replace human investigation or established security controls.
-
+</div>
